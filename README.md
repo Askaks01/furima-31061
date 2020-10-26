@@ -1,24 +1,70 @@
-# README
+#テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column         | Type   | Options     |
+| -------------- | ------ | ----------- |
+| nickname       | string | null: false |
+| email          | string | null: false |
+| first_name     | string | null: false |
+| last_name      | string | null: false |
+| first_furigana | string | null: false |
+| last_furigana  | string | null: false |
+| birthday       | date   | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :purchase_histories
+- belongs_to_active_hash :birthday
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column        | Type       | Option      |
+| ------------- | ---------- | ----------- |
+| item_name     | string     | null: false |
+| category      | integer    | null: false |
+| price         | integer    | null: false |
+| user_id       | references | null: false |
+| description   | text       | null: false |
+| postage       | integer    | null: false |
+| shipping_area | integer    | null: false |
+| shipping_day  | integer    | null: false |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user
+- has_one :purchase_history
+- belongs_to_active_hash :category
+- belongs_to_active_hash :postage
+- belongs_to_active_hash :shipping_area
+- belongs_to_active_hash :shipping_day
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchase_histories テーブル
 
-* Deployment instructions
+| Column           | Type       | Option      |
+| ---------------- | ---------- | ----------- |
+| purchase_info_id | integer    | null: false, foreign_key: true |
+| item_id          | integer    | null: false, foreign_key: true |
+| user_id          | integer    | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :purchase_info
+
+## purchase_info テーブル
+
+| Column              | Type       | Option      |
+| ------------------- | ---------- | ----------- |
+| address             | string     | null: false |
+| phone_number        | string     | null: false |
+| purchase_history_id | integer    | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :purchase_info
+
+
+
