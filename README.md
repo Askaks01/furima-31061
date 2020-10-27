@@ -17,7 +17,6 @@
 
 - has_many :items
 - has_many :purchase_histories
-- belongs_to_active_hash :birthday
 
 ## items テーブル
 
@@ -37,10 +36,6 @@
 
 - belongs_to :user
 - has_one :purchase_history
-- belongs_to_active_hash :category
-- belongs_to_active_hash :postage
-- belongs_to_active_hash :shipping_area
-- belongs_to_active_hash :shipping_day
 
 ## purchase_histories テーブル
 
