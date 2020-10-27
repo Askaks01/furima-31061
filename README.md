@@ -2,15 +2,15 @@
 
 ## users テーブル
 
-| Column         | Type   | Options     |
-| -------------- | ------ | ----------- |
-| nickname       | string | null: false |
-| email          | string | null: false |
-| first_name     | string | null: false |
-| last_name      | string | null: false |
-| first_furigana | string | null: false |
-| last_furigana  | string | null: false |
-| birthday       | date   | null: false |
+| Column     | Type   | Options     |
+| ---------- | ------ | ----------- |
+| nickname   | string | null: false |
+| email      | string | null: false |
+| first_name | string | null: false |
+| last_name  | string | null: false |
+| first_kana | string | null: false |
+| last_kana  | string | null: false |
+| birthday   | date   | null: false |
 
 ### Association
 
@@ -20,16 +20,16 @@
 
 ## items テーブル
 
-| Column        | Type       | Option      |
-| ------------- | ---------- | ----------- |
-| item_name     | string     | null: false |
-| category      | integer    | null: false |
-| price         | integer    | null: false |
-| user_id       | references | null: false |
-| description   | text       | null: false |
-| postage       | integer    | null: false |
-| shipping_area | integer    | null: false |
-| shipping_day  | integer    | null: false |
+| Column           | Type       | Option      |
+| ---------------- | ---------- | ----------- |
+| name             | string     | null: false |
+| category_id      | integer    | null: false |
+| price            | integer    | null: false |
+| user             | references | null: false |
+| description      | text       | null: false |
+| postage_id       | integer    | null: false |
+| shipping_area_id | integer    | null: false |
+| shipping_day_id  | integer    | null: false |
 
 ### Association
 
@@ -42,11 +42,10 @@
 
 ## purchase_histories テーブル
 
-| Column           | Type       | Option      |
-| ---------------- | ---------- | ----------- |
-| purchase_info_id | integer    | null: false, foreign_key: true |
-| item_id          | integer    | null: false, foreign_key: true |
-| user_id          | integer    | null: false, foreign_key: true |
+| Column        | Type       | Option                         |
+| ------------- | ---------- | ------------------------------ |
+| item          | references | null: false, foreign_key: true |
+| user          | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -56,15 +55,19 @@
 
 ## purchase_info テーブル
 
-| Column              | Type       | Option      |
-| ------------------- | ---------- | ----------- |
-| address             | string     | null: false |
-| phone_number        | string     | null: false |
-| purchase_history_id | integer    | null: false, foreign_key: true |
+| Column           | Type       | Option                         |
+| ---------------- | ---------- | ------------------------------ |
+| postal_code      | integer    | null: false                    |
+| prefecture       | integer    | null: false                    |
+| city             | string     | null: false                    |
+| house_num        | string     | null: false                    |
+| building_name    | string     |                                |
+| phone_num        | string     | null: false                    |
+| purchase_history | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :purchase_info
+- belongs_to :purchase_histories
 
 
 
