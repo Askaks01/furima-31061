@@ -69,7 +69,7 @@
 
 ### Association
 
-- belongs_to :purchase_histories
+- belongs_to :purchase_history
 
 
 
