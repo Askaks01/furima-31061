@@ -4,11 +4,65 @@ RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
   end
-  
-  describe 'ユーザー新規登録' do
+
+  describe 'ユーザー新規登録がうまくいくとき'
+    it "nickname,email,password,password_confirmation,last_name,first_name,last_kana,first_kana,birthdayが存在すれば登録できる" do
+      expect(@user).to be_valid
+    end
+    it "nicknameが40文字以下で登録できる" do
+      @user.nickname = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      expect(@user).to be_valid
+    end
+    it "passwordが半角英数混合6文字以上であれば登録できる" do
+      @user.password = "abc000"
+      @user.password_confirmation = "abc000"
+      expect(@user).to eq be_valid
+    end
+  end
+
+  describe 'ユーザー新規登録がうまくいかないとき' do
     it "nicknameが空だと登録できない" do
+      @user.nickname = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Nickname can't be blank")
     end
     it "emailが空では登録できない" do
+      @user.email = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email can't be blank")
+    end
+    it "emailが一意性でないので登録できない" do
+      @user.save
+      another_user = FactoryBot.build(:user)
+      another_user.email = @user.email
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include("Email has already been taken")
+    end
+    it "emailに@が含まれていないので登録できない" do
+      @user.mail = "abcdef"
+      @user.valid?
+      
+    end
+    it "passwordに空だと登録できない" do
+    end
+    it "psswordが6文字以上でないので登録できない" do
+    end
+    it "passwordが半角英数混合でないので登録できない" do
+    end
+    it "password（確認用）が空だと登録できない" do
+    end
+    it "passwordが確認用と一致していないので登録できない" do
+    end
+
+    it "本名が空だと登録できない" do
+    end
+    it "本名が全角（漢字・ひらがな・カタカナ）でないので登録できない" do
+    end
+    it "フリガナが空だと登録できない" do
+    end
+    it "フリガナが全角（カタカナ）でないので登録できない" do
+    end
+    it "birthdayが空だと登録できない" do
     end
   end
 end
