@@ -16,7 +16,7 @@ describe User do
       it "passwordが半角英数混合6文字以上であれば登録できる" do
         @user.password = "abc000"
         @user.password_confirmation = "abc000"
-        expect(@user).to eq be_valid
+        expect(@user).to be_valid
       end
     end
 
@@ -53,7 +53,7 @@ describe User do
         @user.password = "000000"
         @user.password_confirmation = "000000" 
         @user.valid?
-        expect(@user.errors.full_messages).to include("invalid password")
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it "password（確認用）が空だと登録できない" do
         @user.password_confirmation = ""
