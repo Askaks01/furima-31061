@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   has_one :purchase_history
 
   with_options presence: true do
-    validates :name
+    validates :name, length: { maximum: 40 }
     validates :price, 
     :numericality => {
       :greater_than_or_equal_to => 300,
@@ -18,7 +18,7 @@ class Item < ApplicationRecord
     }, 
     format: { with: /\A[0-9]+\z/ }
     validates :image
-    validates :description
+    validates :description, length: { maximum: 1000 }
   end
   with_options presence: true, numericality: { other_than: 1 } do
     validates :prefecture_id
