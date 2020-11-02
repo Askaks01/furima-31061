@@ -76,7 +76,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Postage must be other than 1")
     end
 
-    it 'Shippingが_day---では保存できないこと' do
+    it 'Shipping_dayでは---では保存できないこと' do
       @item.shipping_day_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping day must be other than 1")
