@@ -7,15 +7,14 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_day
   belongs_to :user
   has_one_attached :image
-  
 
   with_options presence: true do
     validates :name, length: { maximum: 40 }
-    validates :price, 
-     numericality: {
-      greater_than_or_equal_to: 300,
-      less_than_or_equal_to: 9999999
-    }
+    validates :price,
+              numericality: {
+                greater_than_or_equal_to: 300,
+                less_than_or_equal_to: 9_999_999
+              }
     validates :image
     validates :description, length: { maximum: 1000 }
   end
@@ -25,6 +24,5 @@ class Item < ApplicationRecord
     validates :condition_id
     validates :postage_id
     validates :shipping_day_id
-  end 
-  
+  end
 end
