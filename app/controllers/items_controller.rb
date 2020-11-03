@@ -20,6 +20,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @purchase_history = PurchaseHistory.find(params[:id])
   end
 
   private
