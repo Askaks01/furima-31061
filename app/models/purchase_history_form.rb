@@ -14,7 +14,7 @@ class ItemPurchaseHistory
 
 
   def save
-    purchase_history = PurchaseHistory.create(user_id: current_user.id, item_id: item.id) 
+    purchase_history = PurchaseHistory.create(user_id: current_user.id, item_id: params[:item_id]) 
     purchase_info = PurchaseInfo.create
   end
 
