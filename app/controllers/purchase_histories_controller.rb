@@ -3,7 +3,7 @@ class PurchaseHistoriesController < ApplicationController
   end
 
   def create
-    PurchaseHistory.create(purchase_history_params)
+    @purchase_history = PurchaseHistory.create(purchase_history_params)
   end
 
 end
