@@ -1,5 +1,6 @@
 class PurchaseHistoriesController < ApplicationController
   def index
+    @item_purchase_history = ItemPurchaseHistory.new
   end
 
   def create

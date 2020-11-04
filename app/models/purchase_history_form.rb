@@ -15,7 +15,7 @@ class ItemPurchaseHistory
 
   def save
     purchase_history = PurchaseHistory.create(user_id: current_user.id, item_id: params[:item_id]) 
-    purchase_info = PurchaseInfo.create
+    PurchaseInfo.create(postal_code: postal_code, prefecture_id: prefecture.id, city: city, house_num: house_num, phone_num: phone_num, building_name: building_name, purchase_history_id: purchase_history.id)
   end
 
 end
