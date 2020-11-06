@@ -4,7 +4,7 @@ class PurchaseHistoryForm
   
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: "input correctly" }
-    validates :prefecture_id, numericality: { other_than: 1, message: " Select" }
+    validates :prefecture_id, numericality: { other_than: 1, message: "Select" }
     validates :city
     validates :house_num
     validates :phone_num, format: { with: /\A\d{10,11}\z/, message: "input only number" }

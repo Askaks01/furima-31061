@@ -41,22 +41,22 @@ RSpec.describe PurchaseHistoryForm, type: :model do
     end
 
     it 'phone_numが空では保存できないこと' do
-      @purchase_history_form.house_num = nil
+      @purchase_history_form.phone_num = nil
       @purchase_history_form.valid?
       expect(@purchase_history_form.errors.full_messages).to include("Phone num can't be blank")
     end
 
     it 'phone_numは-があると保存できないこと' do
       @purchase_history_form.phone_num = "09-12345678"
-      @@purchase_history_form.valid?
+      @purchase_history_form.valid?
       expect(@purchase_history_form.errors.full_messages).to include('Phone num input only number')
     end
 
     it 'phone_numは12桁以上では保存できないこと' do
       @purchase_history_form.phone_num = "090123456789"
-      @@purchase_history_form.valid?
+      @purchase_history_form.valid?
       expect(@purchase_history_form.errors.full_messages).to include('Phone num input only number')
     end
-    
+
   end
 end
