@@ -1,6 +1,7 @@
 class PurchaseHistoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_item_index
+  before_action :sold_out
   
   def index
     @item = Item.find(params[:item_id])
@@ -30,5 +31,13 @@ class PurchaseHistoriesController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def sold_out
+    @item = Item.find(params[:item_id])
+    if @item.purchase_history != nil
+      redirect_to root_path
+    end
+  end
+
 
 end
