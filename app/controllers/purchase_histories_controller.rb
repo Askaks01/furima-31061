@@ -5,11 +5,13 @@ class PurchaseHistoriesController < ApplicationController
   end
 
   def create
+    @item = Item.find(params[:item_id])
     @purchase_history_form = PurchaseHistoryForm.new(purchase_history_form_params)
-    if @purchase_history_form.save
+    if @purchase_history_form.valid?
+      @purchase_history_form.save
       redirect_to root_path
     else
-      render :index
+      render action: :index
     end
   end
 

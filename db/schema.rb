@@ -59,12 +59,12 @@ ActiveRecord::Schema.define(version: 2020_11_04_033138) do
 
   create_table "purchase_infos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "purchase_history_id", null: false
-    t.string "postal_code", default: "", null: false
+    t.string "postal_code", null: false
     t.integer "prefecture_id", null: false
-    t.string "city", default: "", null: false
-    t.string "house_num", default: "", null: false
-    t.string "building_name", default: ""
-    t.string "phone_num", default: "", null: false
+    t.string "city", null: false
+    t.string "house_num", null: false
+    t.string "building_name"
+    t.string "phone_num", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["purchase_history_id"], name: "index_purchase_infos_on_purchase_history_id"
