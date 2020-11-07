@@ -6,7 +6,7 @@ RSpec.describe PurchaseHistoryForm, type: :model do
       @purchase_history_form = FactoryBot.build(:purchase_history_form)
     end
 
-    it 'postal_code,prefecture,city,house_num,phone_numが存在していれば保存できること' do
+    it 'postal_code,prefecture,city,house_num,phone_num,tokenが存在していれば保存できること' do
       expect(@purchase_history_form).to be_valid
     end
 
@@ -56,6 +56,12 @@ RSpec.describe PurchaseHistoryForm, type: :model do
       @purchase_history_form.phone_num = "090123456789"
       @purchase_history_form.valid?
       expect(@purchase_history_form.errors.full_messages).to include('Phone num input only number')
+    end
+
+    it 'tokenが空では保存できないこと' do
+      @purchase_history_form.token = nil
+      @purchase_history_form.valid?
+      expect(@purchase_history_form.errors.full_messages).to include("Token can't be blank")
     end
 
   end
