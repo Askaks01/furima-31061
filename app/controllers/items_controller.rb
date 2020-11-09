@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :move_to_index, only: :edit
   before_action :sold_out, only: :edit
-  before_action :item_find, only: [:edit, :update, :show, :move_to_index]
+  before_action :item_find, only: [:edit, :update, :show, :move_to_index, :sold_out]
 
   def index
     @items = Item.order('created_at DESC')
@@ -50,7 +50,6 @@ class ItemsController < ApplicationController
   end
 
   def sold_out
-    @item = Item.find(params[:id])
     redirect_to root_path unless @item.purchase_history.nil?
   end
 end
