@@ -2,7 +2,7 @@ class PurchaseHistoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_item_index
   before_action :sold_out
-  
+
   def index
     @item = Item.find(params[:item_id])
     @purchase_history_form = PurchaseHistoryForm.new
@@ -28,25 +28,20 @@ class PurchaseHistoriesController < ApplicationController
 
   def move_to_item_index
     @item = Item.find(params[:item_id])
-    if @item.user_id == current_user.id
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.user_id == current_user.id
   end
 
   def sold_out
     @item = Item.find(params[:item_id])
-    if @item.purchase_history != nil
-      redirect_to root_path
-    end
+    redirect_to root_path unless @item.purchase_history.nil?
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: purchase_history_form_params[:token],
       currency: 'jpy'
     )
   end
-
 end
